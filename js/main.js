@@ -42,7 +42,7 @@ $(() => {
         // Exist DNS
         if (dns) {
             readDomainData(params.d, 'ipfsHash').then(cid => {
-                open(tinyProxy.url.replace('{cid}', cid.data).replace('{cid32}', CIDTool.base32(cid.data)));
+                open(tinyProxy.url.replace('{cid}', cid.data).replace('{cid32}', CIDTool.base32(cid.data)), '_self');
             }).catch(err => {
                 console.error(err);
                 alert(err.message);
