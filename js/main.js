@@ -42,17 +42,17 @@ $(() => {
         // Exist DNS
         if (dns) {
             readDomainData(params.d, 'ipfsHash').then(cid => {
-                open(tinyProxy.url.replace('{cid}', cid.data).replace('{cid32}', CIDTool.base32(cid.data)), '_self');
+                document.location.href = tinyProxy.url.replace('{cid}', cid.data).replace('{cid32}', CIDTool.base32(cid.data));
             }).catch(err => {
                 console.error(err);
                 alert(err.message);
                 $.LoadingOverlay("hide");
-                startHomepage();
+                document.location.href = '/';
             });
         } else {
             alert('Invalid DNS Server!');
             $.LoadingOverlay("hide");
-            startHomepage();
+            document.location.href = '/';
         }
 
     } else { startHomepage(); }
