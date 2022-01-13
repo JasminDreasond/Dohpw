@@ -28,6 +28,17 @@ $(() => {
         // Start Load Page
         $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)", text: `Loading ${params.d}` });
 
+        // Get Custom Proxy
+        if (localStorage && localStorage.getItem) {
+
+            // Get Custom Proxy
+            const customCIDProxy = localStorage.getItem('customCIDProxy');
+            if (typeof customCIDProxy === 'string' && customCIDProxy.length > 0) {
+                tinyProxy.url = customCIDProxy;
+            }
+
+        }
+
         // Domain DNS Selected
         let dns = null;
         for (const where in domains) {
