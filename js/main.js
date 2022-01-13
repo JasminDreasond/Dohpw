@@ -46,9 +46,20 @@ $(() => {
             }).catch(err => {
                 console.error(err);
                 alert(err.message);
+                startHomepage();
             });
+        } else {
+            alert('Invalid DNS Server!');
+            startHomepage();
         }
 
-    }
+    } else { startHomepage(); }
 
 });
+
+// Start Homepage
+const startHomepage = function() {
+
+
+
+};
