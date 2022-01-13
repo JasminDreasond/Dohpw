@@ -74,10 +74,13 @@ $(() => {
 const startHomepage = function() {
 
     // Start Homepage
-    $('body').append(
+    /* $('body').append(
 
 
 
-    );
+    ); */
+
+    // Temp Redirect
+    document.location.href = 'https://github.com/JasminDreasond/Dohpw';
 
 };
