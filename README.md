@@ -13,6 +13,10 @@ https://doh.pw/?d={domain-name}
 
 Example: https://doh.pw/?d=jasmindreasond.crypto
 
+You can also create a URL to redirect to a specific page on the domain: 
+
+https://doh.pw/?d=jasmindreasond.crypto/test.html
+
 ## Images
 
 <img src="https://github.com/JasminDreasond/Dohpw/blob/main/img/example/search-example.webp?raw=true" height="500" />
