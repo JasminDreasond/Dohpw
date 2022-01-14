@@ -25,8 +25,11 @@ $(() => {
     // Exist Domain
     if (typeof params.d === 'string' && params.d.length > 0) {
 
+        // Domain
+        const domain = params.d.split('/');
+
         // Start Load Page
-        $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)", text: `Loading ${params.d}` });
+        $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)", text: `Loading ${domain[0]}` });
 
         // Get Custom Proxy
         if (localStorage && localStorage.getItem) {
@@ -43,7 +46,7 @@ $(() => {
         let dns = null;
         for (const where in domains) {
             for (const item in domains[where]) {
-                if (params.d.endsWith(domains[where][item])) {
+                if (domain[0].endsWith(domains[where][item])) {
                     dns = where;
                     break;
                 }
@@ -52,8 +55,9 @@ $(() => {
 
         // Exist DNS
         if (dns) {
-            readDomainData(params.d, 'ipfsHash').then(cid => {
-                document.location.href = tinyProxy.url.replace('{cid}', cid.data).replace('{cid32}', CIDTool.base32(cid.data));
+            readDomainData(domain[0], 'ipfsHash').then(cid => {
+                domain.shift();
+                document.location.href = tinyProxy.url.replace('{cid}', cid.data).replace('{cid32}', CIDTool.base32(cid.data)) + domain.join('/');
             }).catch(err => {
                 console.error(err);
                 alert(err.message);
