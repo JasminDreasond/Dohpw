@@ -15,7 +15,7 @@ Example: https://doh.pw/?d=jasmindreasond.crypto
 
 ## Images
 
-<img src="https://github.com/JasminDreasond/Dohpw/blob/main/img/search-example.webp?raw=true" height="500" />
+<img src="https://github.com/JasminDreasond/Dohpw/blob/main/img/example/search-example.webp?raw=true" height="500" />
 
 <hr/>
 
