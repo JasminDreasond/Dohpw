@@ -17,6 +17,12 @@ You can also create a URL to redirect to a specific page on the domain:
 
 https://doh.pw/?d=jasmindreasond.crypto/test.html
 
+## Get Crypto Wallet
+
+https://doh.pw/?d={domain-name}&currency={symbol}
+
+Example: https://doh.pw/?d=jasmindreasond.crypto&currency=BTC
+
 ## Images
 
 <img src="https://github.com/JasminDreasond/Dohpw/blob/main/img/example/search-example.webp?raw=true" height="500" />
