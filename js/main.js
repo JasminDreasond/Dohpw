@@ -55,15 +55,32 @@ $(() => {
 
         // Exist DNS
         if (dns) {
-            readDomainData(domain[0], 'ipfsHash').then(cid => {
-                domain.shift();
-                document.location.href = tinyProxy.url.replace('{cid}', cid.data).replace('{cid32}', CIDTool.base32(cid.data)) + domain.join('/');
-            }).catch(err => {
-                console.error(err);
-                alert(err.message);
-                $.LoadingOverlay("hide");
-                document.location.href = '/';
-            });
+            if (typeof params.currency !== 'string' || params.currency.length < 1) {
+                readDomainData(domain[0], 'ipfsHash').then(cid => {
+                    domain.shift();
+                    document.location.href = tinyProxy.url.replace('{cid}', cid.data).replace('{cid32}', CIDTool.base32(cid.data)) + domain.join('/');
+                }).catch(err => {
+                    console.error(err);
+                    alert(err.message);
+                    $.LoadingOverlay("hide");
+                    document.location.href = '/';
+                });
+            } else {
+                readDomainData(domain[0], 'addr', params.currency).then(address => {
+                    $('body').append(
+                        $('<center>', { class: 'container my-5' }).append(
+                            $('<input>', { class: 'form-control text-center' })
+                        )
+                    )
+                    $.LoadingOverlay("hide");
+                    console.log(address.data);
+                }).catch(err => {
+                    console.error(err);
+                    alert(err.message);
+                    $.LoadingOverlay("hide");
+                    document.location.href = '/';
+                });
+            }
         } else {
             alert('Invalid DNS Server!');
             $.LoadingOverlay("hide");
