@@ -73,7 +73,9 @@ $(() => {
                                 $('<span>').text(domain[0]),
                                 $('<span>', { class: 'badge badge-secondary ml-2' }).text(params.currency.toLocaleUpperCase())
                             ),
-                            $('<input>', { class: 'form-control text-center' }).val(address.data)
+                            $('<input>', { class: 'form-control text-center' }).attr('readonly', true).val(address.data).click(function() {
+                                $(this).select();
+                            })
                         )
                     )
                     $.LoadingOverlay("hide");
