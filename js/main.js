@@ -69,11 +69,14 @@ $(() => {
                 readDomainData(domain[0], 'addr', params.currency).then(address => {
                     $('body').append(
                         $('<center>', { class: 'container my-5' }).append(
-                            $('<input>', { class: 'form-control text-center' })
+                            $('<h3>', { class: 'mb-4' }).append(
+                                $('<span>').text(domain[0]),
+                                $('<span>', { class: 'badge badge-secondary ml-2' }).text(params.currency.toLocaleUpperCase())
+                            ),
+                            $('<input>', { class: 'form-control text-center' }).val(address.data)
                         )
                     )
                     $.LoadingOverlay("hide");
-                    console.log(address.data);
                 }).catch(err => {
                     console.error(err);
                     alert(err.message);
