@@ -13,6 +13,10 @@ var readDomainData = function(domain, type, data) {
                 resolution.addr(domain, data).then((addr) => {
                     return resolve({ data: addr, dns: 'unstoppabledomains' });
                 }).catch(reject);
+            } else if (type === 'multiChainAddr') {
+                resolution.multiChainAddr(domain, data, data2).then((addr) => {
+                    return resolve({ data: addr, dns: 'unstoppabledomains' });
+                }).catch(reject);
             } else {
                 reject(new Error('Invalid Read Domain Request!'));
             }
