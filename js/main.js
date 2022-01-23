@@ -84,12 +84,21 @@ $(() => {
                 // Complete
                 .then(address => {
 
+                    // Prepare Text
+                    const textData = [
+                        $('<span>').text(domain[0]),
+                        $('<span>', { class: 'badge badge-secondary ml-2' }).text(params.currency.toLocaleUpperCase())
+                    ];
+
+                    // Exist Chain Value
+                    if (params.chain) {
+                        textData.push($('<span>', { class: 'badge badge-secondary ml-2' }).text(params.chain.toLocaleUpperCase()));
+                    }
+
+                    // Set Body
                     $('body').append(
                         $('<center>', { class: 'container my-5' }).append(
-                            $('<h3>', { class: 'mb-4' }).append(
-                                $('<span>').text(domain[0]),
-                                $('<span>', { class: 'badge badge-secondary ml-2' }).text(params.currency.toLocaleUpperCase())
-                            ),
+                            $('<h3>', { class: 'mb-4' }).append(textData),
                             $('<input>', { class: 'form-control text-center' }).attr('readonly', true).val(address.data).click(function() {
                                 $(this).select();
                             })
