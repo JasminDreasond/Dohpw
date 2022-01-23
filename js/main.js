@@ -55,6 +55,8 @@ $(() => {
 
         // Exist DNS
         if (dns) {
+
+            // DNS Mode
             if (typeof params.currency !== 'string' || params.currency.length < 1) {
                 readDomainData(domain[0], 'ipfsHash').then(cid => {
                     domain.shift();
@@ -65,12 +67,23 @@ $(() => {
                     $.LoadingOverlay("hide");
                     document.location.href = '/';
                 });
-            } else {
+            }
+
+            // Wallet Mode
+            else {
+
+                // Choose Type
                 let typeAction = 'addr';
                 if (typeof params.chain === 'string' && params.chain.length > 0) {
                     typeAction = 'multiChainAddr';
                 }
-                readDomainData(domain[0], typeAction, params.currency, params.chain).then(address => {
+
+                // Action
+                readDomainData(domain[0], typeAction, params.currency, params.chain)
+
+                // Complete
+                .then(address => {
+
                     $('body').append(
                         $('<center>', { class: 'container my-5' }).append(
                             $('<h3>', { class: 'mb-4' }).append(
@@ -82,21 +95,33 @@ $(() => {
                             })
                         )
                     )
+
+                    // Show Page
                     $.LoadingOverlay("hide");
-                }).catch(err => {
+
+                })
+
+                // Error
+                .catch(err => {
                     console.error(err);
                     alert(err.message);
                     $.LoadingOverlay("hide");
                     document.location.href = '/';
                 });
             }
-        } else {
+        }
+
+        // Invalid
+        else {
             alert('Invalid DNS Server!');
             $.LoadingOverlay("hide");
             document.location.href = '/';
         }
 
-    } else { startHomepage(); }
+    }
+
+    // Homepage
+    else { startHomepage(); }
 
 });
 
