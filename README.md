@@ -19,9 +19,11 @@ https://doh.pw/?d=jasmindreasond.crypto/test.html
 
 ## Get Crypto Wallet
 
-https://doh.pw/?d={domain-name}&currency={symbol}
+https://doh.pw/?d={domain-name}&currency={symbol}&chain={chain}
 
 Example: https://doh.pw/?d=jasmindreasond.crypto&currency=BTC
+
+Example 2: https://doh.pw/?d=jasmindreasond.crypto&currency=BUSD&chain=ERC20
 
 ## Images
 
