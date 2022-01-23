@@ -66,7 +66,11 @@ $(() => {
                     document.location.href = '/';
                 });
             } else {
-                readDomainData(domain[0], 'addr', params.currency).then(address => {
+                let typeAction = 'addr';
+                if (typeof params.chain === 'string' && params.chain.length > 0) {
+                    typeAction = 'multiChainAddr';
+                }
+                readDomainData(domain[0], typeAction, params.currency, params.chain).then(address => {
                     $('body').append(
                         $('<center>', { class: 'container my-5' }).append(
                             $('<h3>', { class: 'mb-4' }).append(

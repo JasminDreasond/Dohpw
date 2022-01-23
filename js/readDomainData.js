@@ -1,5 +1,5 @@
 var resolution = new unResolution.Resolution();
-var readDomainData = function(domain, type, data) {
+var readDomainData = function(domain, type, data, data2) {
     return new Promise(function(resolve, reject) {
 
         // UD
