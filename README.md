@@ -3,7 +3,7 @@ This is a simple and short URL to redirect users to an NFT domain simply and qui
 
 ## Crypto Donations
 
-<a href="https://unstoppabledomains.com/d/jasmindreasond.crypto" target="_blank">The list of all my cryptocurrency addresses are registered here.</a>
+<a href="https://ud.me/jasmindreasond.wallet" target="_blank">Donations Here</a>
 
 <hr/>
 
