@@ -25,11 +25,17 @@ Example: https://doh.pw/?d=jasmindreasond.crypto&currency=BTC
 
 Example 2: https://doh.pw/?d=jasmindreasond.crypto&currency=BUSD&chain=ERC20
 
-## Bitcoin Protocol Proxy
+## Bitcoin Protocol
 
 https://doh.pw/?d=bitcoin:{wallet-address}
 
 Example: https://doh.pw/?d=bitcoin:bc1qhs82du0cklclz2fvtz40hky4f2c3qys09erel3
+
+## Steam Store Protocol
+
+https://doh.pw/?d={steam-store-url}
+
+Example: https://doh.pw/?d=https://store.steampowered.com/app/4000/Garrys_Mod/
 
 ## Images
 
