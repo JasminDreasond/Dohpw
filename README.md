@@ -25,6 +25,12 @@ Example: https://doh.pw/?d=jasmindreasond.crypto&currency=BTC
 
 Example 2: https://doh.pw/?d=jasmindreasond.crypto&currency=BUSD&chain=ERC20
 
+## Bitcoin Protocol Proxy
+
+https://doh.pw/?d=bitcoin:{wallet-address}
+
+Example: https://doh.pw/d=bitcoin:bc1qhs82du0cklclz2fvtz40hky4f2c3qys09erel3
+
 ## Images
 
 <img src="https://github.com/JasminDreasond/Dohpw/blob/main/img/example/search-example.webp?raw=true" height="500" />
