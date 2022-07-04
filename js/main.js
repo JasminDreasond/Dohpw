@@ -35,6 +35,12 @@ $(() => {
             location.href = params.d;
         }
 
+        // Steam Store
+        else if (params.d.startsWith('https://store.steampowered.com/app/')) {
+            const appID = params.d.split('/')[4];
+            location.href = 'steam://store/' + appID;
+        }
+
         // Others
         else {
 
