@@ -25,106 +25,121 @@ $(() => {
     // Exist Domain
     if (typeof params.d === 'string' && params.d.length > 0) {
 
-        // Domain
-        const domain = params.d.split('/');
+        // Direct Domain
+        if (
 
-        // Start Load Page
-        $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)", text: `Loading ${domain[0]}` });
+            // Bitcoin
+            params.d.startsWith('bitcoin:')
 
-        // Get Custom Proxy
-        if (localStorage && localStorage.getItem) {
+        ) {
+            location.href = params.d;
+        }
+
+        // Others
+        else {
+
+            // Domain
+            const domain = params.d.split('/');
+
+            // Start Load Page
+            $.LoadingOverlay("show", { background: "rgba(0,0,0, 0.5)", text: `Loading ${domain[0]}` });
 
             // Get Custom Proxy
-            const customCIDProxy = localStorage.getItem('customCIDProxy');
-            if (typeof customCIDProxy === 'string' && customCIDProxy.length > 0) {
-                tinyProxy.url = customCIDProxy;
-            }
+            if (localStorage && localStorage.getItem) {
 
-        }
-
-        // Domain DNS Selected
-        let dns = null;
-        for (const where in domains) {
-            for (const item in domains[where]) {
-                if (domain[0].endsWith(domains[where][item])) {
-                    dns = where;
-                    break;
-                }
-            }
-        }
-
-        // Exist DNS
-        if (dns) {
-
-            // DNS Mode
-            if (typeof params.currency !== 'string' || params.currency.length < 1) {
-                readDomainData(domain[0], 'ipfsHash').then(cid => {
-                    domain.shift();
-                    document.location.href = tinyProxy.url.replace('{cid}', cid.data).replace('{cid32}', CIDTool.base32(cid.data)) + domain.join('/');
-                }).catch(err => {
-                    console.error(err);
-                    alert(err.message);
-                    $.LoadingOverlay("hide");
-                    document.location.href = '/';
-                });
-            }
-
-            // Wallet Mode
-            else {
-
-                // Choose Type
-                let typeAction = 'addr';
-                if (typeof params.chain === 'string' && params.chain.length > 0) {
-                    typeAction = 'multiChainAddr';
+                // Get Custom Proxy
+                const customCIDProxy = localStorage.getItem('customCIDProxy');
+                if (typeof customCIDProxy === 'string' && customCIDProxy.length > 0) {
+                    tinyProxy.url = customCIDProxy;
                 }
 
-                // Action
-                readDomainData(domain[0], typeAction, params.currency, params.chain)
+            }
 
-                // Complete
-                .then(address => {
+            // Domain DNS Selected
+            let dns = null;
+            for (const where in domains) {
+                for (const item in domains[where]) {
+                    if (domain[0].endsWith(domains[where][item])) {
+                        dns = where;
+                        break;
+                    }
+                }
+            }
 
-                    // Prepare Text
-                    const textData = [
-                        $('<span>').text(domain[0]),
-                        $('<span>', { class: 'badge badge-secondary ml-2' }).text(params.currency.toLocaleUpperCase())
-                    ];
+            // Exist DNS
+            if (dns) {
 
-                    // Exist Chain Value
-                    if (params.chain) {
-                        textData.push($('<span>', { class: 'badge badge-secondary ml-2' }).text(params.chain.toLocaleUpperCase()));
+                // DNS Mode
+                if (typeof params.currency !== 'string' || params.currency.length < 1) {
+                    readDomainData(domain[0], 'ipfsHash').then(cid => {
+                        domain.shift();
+                        document.location.href = tinyProxy.url.replace('{cid}', cid.data).replace('{cid32}', CIDTool.base32(cid.data)) + domain.join('/');
+                    }).catch(err => {
+                        console.error(err);
+                        alert(err.message);
+                        $.LoadingOverlay("hide");
+                        document.location.href = '/';
+                    });
+                }
+
+                // Wallet Mode
+                else {
+
+                    // Choose Type
+                    let typeAction = 'addr';
+                    if (typeof params.chain === 'string' && params.chain.length > 0) {
+                        typeAction = 'multiChainAddr';
                     }
 
-                    // Set Body
-                    $('body').append(
-                        $('<center>', { class: 'container my-5' }).append(
-                            $('<h3>', { class: 'mb-4' }).append(textData),
-                            $('<input>', { class: 'form-control text-center' }).attr('readonly', true).val(address.data).click(function() {
-                                $(this).select();
-                            })
+                    // Action
+                    readDomainData(domain[0], typeAction, params.currency, params.chain)
+
+                    // Complete
+                    .then(address => {
+
+                        // Prepare Text
+                        const textData = [
+                            $('<span>').text(domain[0]),
+                            $('<span>', { class: 'badge badge-secondary ml-2' }).text(params.currency.toLocaleUpperCase())
+                        ];
+
+                        // Exist Chain Value
+                        if (params.chain) {
+                            textData.push($('<span>', { class: 'badge badge-secondary ml-2' }).text(params.chain.toLocaleUpperCase()));
+                        }
+
+                        // Set Body
+                        $('body').append(
+                            $('<center>', { class: 'container my-5' }).append(
+                                $('<h3>', { class: 'mb-4' }).append(textData),
+                                $('<input>', { class: 'form-control text-center' }).attr('readonly', true).val(address.data).click(function() {
+                                    $(this).select();
+                                })
+                            )
                         )
-                    )
 
-                    // Show Page
-                    $.LoadingOverlay("hide");
+                        // Show Page
+                        $.LoadingOverlay("hide");
 
-                })
+                    })
 
-                // Error
-                .catch(err => {
-                    console.error(err);
-                    alert(err.message);
-                    $.LoadingOverlay("hide");
-                    document.location.href = '/';
-                });
+                    // Error
+                    .catch(err => {
+                        console.error(err);
+                        alert(err.message);
+                        $.LoadingOverlay("hide");
+                        document.location.href = '/';
+                    });
+                }
             }
-        }
 
-        // Invalid
-        else {
-            alert('Invalid DNS Server!');
-            $.LoadingOverlay("hide");
-            document.location.href = '/';
+            // Invalid
+            else {
+                alert('Invalid DNS Server!');
+                $.LoadingOverlay("hide");
+                document.location.href = '/';
+            }
+
         }
 
     }
